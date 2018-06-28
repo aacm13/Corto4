@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.Filtro;
-import sun.util.logging.PlatformLogger;
+//import sun.util.logging.PlatformLogger;
 
 /**
  *
@@ -22,10 +22,10 @@ import sun.util.logging.PlatformLogger;
  */
 public class FiltroDao implements metodos<Filtro> {
 
-    private static final String SQL_INSERT = "INSERT INTO productos (CodFiltro, precio, nombre, cantidad, tipo, disponibilidad) VALUES(?,?,?,?,?,?)";
-    private static final String SQL_UPDATE = "UPDATE productos SET precio = ?, nombre = ?, cantidad = ?, tipo = ?, disponibilidad = ? WHERE CodFiltro = ?";
-    private static final String SQL_DELETE = "DELETE FROM productos WHERE codFiltro = ?";
-    private static final String SQL_READ = "SELECT * FROM productos WHERE codFiltro = ?";
+    private static final String SQL_INSERT = "INSERT INTO productos (codigo, precio, nombre, cantidad, tipo, disponibilidad) VALUES(?,?,?,?,?,?)";
+    private static final String SQL_UPDATE = "UPDATE productos SET precio = ?, nombre = ?, cantidad = ?, tipo = ?, disponibilidad = ? WHERE codigo = ?";
+    private static final String SQL_DELETE = "DELETE FROM productos WHERE codigo = ?";
+    private static final String SQL_READ = "SELECT * FROM productos WHERE codigo = ?";
     private static final String SQL_READALL = "SELECT * FROM productos";
     private static final Conexion con = Conexion.conectar();
 
@@ -37,9 +37,9 @@ public class FiltroDao implements metodos<Filtro> {
             ps.setString(1, g.getCodigo());
             ps.setDouble(2, g.getPrecio());
             ps.setString(3, g.getNombre());
-            ps.setInt(3, g.getCantidad());
-            ps.setString(4, g.getTipo());
-            ps.setBoolean(5, true);
+            ps.setInt(4, g.getCantidad());
+            ps.setString(5, g.getTipo());
+            ps.setBoolean(6, true);
             if (ps.executeUpdate() > 0) {
                 return true;
             }
@@ -107,7 +107,7 @@ public class FiltroDao implements metodos<Filtro> {
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                f = new Filtro(rs.getInt(1), rs.getString(3), rs.getDouble(6), rs.getString(4), rs.getInt(5), rs.getString(2), rs.getBoolean(7));
+                f = new Filtro(rs.getInt(1), rs.getString(3), rs.getDouble(6), rs.getString(2), rs.getInt(5), rs.getString(4), rs.getBoolean(7));
             }
             rs.close();
         } catch (SQLException ex) {
@@ -131,7 +131,7 @@ public class FiltroDao implements metodos<Filtro> {
             rs = s.executeQuery(SQL_READALL);
 
             while (rs.next()) {
-                all.add(new Filtro(rs.getInt(1), rs.getString(3), rs.getDouble(6), rs.getString(2), rs.getInt(5), rs.getString(4), rs.getBoolean(7)));
+                all.add(new Filtro(rs.getInt(1),rs.getString(3), rs.getDouble(6), rs.getString(2), rs.getInt(5), rs.getString(4), rs.getBoolean(7)));
             }
             rs.close();
         } catch (SQLException ex) {

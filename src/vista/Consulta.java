@@ -71,6 +71,7 @@ public class Consulta extends JFrame {
         container.add(precio);
         container.add(nombre);
         container.add(cantidad);
+        container.add(tipo);
         container.add(si);
         container.add(no);
         container.add(buscar);
@@ -131,8 +132,8 @@ public class Consulta extends JFrame {
         cantidad.setBounds(140, 140, ANCHOC, ALTOC);
         tipo.setBounds(140, 180, ANCHOC, ALTOC);
         
-        si.setBounds(140, 210, 50, ALTOC);
-        no.setBounds(210, 210, 50, ALTOC);
+        si.setBounds(140, 220, 50, ALTOC);
+        no.setBounds(210, 220, 50, ALTOC);
 
         buscar.setBounds(300, 10, ANCHOC, ALTOC);
         insertar.setBounds(10, 260, ANCHOC, ALTOC);
@@ -189,14 +190,14 @@ public class Consulta extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 FiltroDao fd = new FiltroDao();
-                Filtro f = new Filtro(codigo.getText(),Double.parseDouble(precio.getText()),codigo.getText(),Integer.parseInt(cantidad.getText()), tipo.getSelectedItem().toString(), true);
+                Filtro f = new Filtro(codigo.getText(),Double.parseDouble(precio.getText()),nombre.getText(),Integer.parseInt(cantidad.getText()), tipo.getSelectedItem().toString(), true);
 
                 if (no.isSelected()) {
                     f.setDisponibilidad(false);
                 }
 
                 if (fd.create(f)) {
-                    JOptionPane.showMessageDialog(null, "Preoducto registrado con éxito");
+                    JOptionPane.showMessageDialog(null, "Producto registrado con éxito");
                     limpiarCampos();
                     llenarTabla();
                 } else {
@@ -209,7 +210,7 @@ public class Consulta extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 FiltroDao fd = new FiltroDao();
-                Filtro f = new Filtro(codigo.getText(),Double.parseDouble(precio.getText()),codigo.getText(),Integer.parseInt(cantidad.getText()), tipo.getSelectedItem().toString(), true);
+                Filtro f = new Filtro(codigo.getText(),Double.parseDouble(precio.getText()),nombre.getText(),Integer.parseInt(cantidad.getText()), tipo.getSelectedItem().toString(), true);
 
                 if (no.isSelected()) {
                     f.setDisponibilidad(false);
@@ -277,7 +278,7 @@ public class Consulta extends JFrame {
         codigo.setText("");
         precio.setText("");
         nombre.setText("");
-        tipo.setSelectedItem("");
+        tipo.setSelectedItem("Fruta");
         cantidad.setText("");
 
     }
